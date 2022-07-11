@@ -8,4 +8,4 @@ CI3 is a CodeIgniter 3 application, it has been developed for training purposes.
 Demo
 ***************
 
-www.google.com
+https://xyz.ly/CI3/
