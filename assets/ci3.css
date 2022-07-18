@@ -1,3 +1,6 @@
 .ci3_timeAgo{
     font-size: 12px;
 }
+.ci3_copyRight:hover{
+    text-decoration: none;
+}
