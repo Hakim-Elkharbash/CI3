@@ -10,6 +10,20 @@
             return $this->db->insert('users',$data);
         }  
 
+        public function editUser($userId){
+            $query = $this->db->get_where('users', array('id' => $userId));
+            return $query->row();
+        }
+
+        public function UpdateUser($data, $userId){
+            return $this->db->update('users', $data, array('id' => $userId));
+        }
+
+
+        public function delUser($userId){
+            return $this->db->delete('users', array('id' => $userId));
+        }
+
         public function delAllUsers(){
             return $this->db->empty_table('users');
         }  

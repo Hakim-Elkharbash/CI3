@@ -7,8 +7,14 @@ $route['translate_uri_dashes'] = FALSE;
 
 //------------------ DB routes
 $route['db'] = 'Database/Db/index';
+
 $route['db/add'] = 'Database/Db/add';
 $route['db/save'] = 'Database/Db/save';
+
+$route['db/edit/(:num)'] = 'Database/Db/edit/$1';
+$route['db/update'] = 'Database/Db/update';
+
+$route['db/del'] = 'Database/Db/del';
 $route['db/delAll'] = 'Database/Db/delAll';
 
 

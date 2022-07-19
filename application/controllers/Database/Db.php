@@ -52,6 +52,36 @@ class Db extends CI_Controller {
 	}
 
 
+	public function edit($userId)
+	{
+		$this->load->view('header');
+		$this->load->model('DbModel');
+		$data['userData'] = $this->DbModel->editUser($userId);
+		$this->load->view('database/edit', $data);
+		$this->load->view('footer');
+	}
+
+	public function update()
+	{
+		$data=[
+			'name' => $this->input->post('name'),
+			'phone' => $this->input->post('phone'),
+			'email' => $this->input->post('email'),
+			'note' => $this->input->post('note'),
+		];
+		
+		$this->load->model('DbModel');
+		$this->DbModel->UpdateUser($data, $this->input->post('id'));	// $this->input->post('id') => can not send it with data becuase it's primery key
+	}
+
+
+	public function del()
+	{	
+		$this->load->model('DbModel');
+		$this->DbModel->delUser($this->input->post('userId'));
+	}
+
+
 	public function delAll()
 	{	
 		$this->load->model('DbModel');
