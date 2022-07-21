@@ -17,4 +17,12 @@ $route['db/update'] = 'Database/Db/update';
 $route['db/del'] = 'Database/Db/del';
 $route['db/delAll'] = 'Database/Db/delAll';
 
+//------------------ Upload routes
+$route['upload'] = 'Upload/Upload/index';
+
+$route['upload/add'] = 'Upload/Upload/add';
+
+$route['upload/upload'] = 'Upload/Upload/upload';
+
+$route['upload/del'] = 'Upload/Upload/del';
 
