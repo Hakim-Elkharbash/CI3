@@ -26,3 +26,9 @@ $route['upload/upload'] = 'Upload/Upload/upload';
 
 $route['upload/del'] = 'Upload/Upload/del';
 
+//------------------ Import routes
+$route['import'] = 'Import/Import/index';
+
+$route['import/add'] = 'Import/Import/add';
+
+$route['import/import'] = 'Import/Import/import';

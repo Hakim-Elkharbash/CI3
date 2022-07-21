@@ -26,7 +26,7 @@
 					<a href="<?= base_url('upload'); ?>" class="btn btn-dark btn-block">Try it <i class="fa-solid fa-angles-right"></i></a>
 				</div>
 				<div class="card-footer text-muted">
-					<span class="ci3_timeAgo"> 1 days ago </span>
+					<span class="ci3_timeAgo"> 2 days ago </span>
 				</div>
 			</div>
 		</div>
@@ -36,10 +36,10 @@
 					<h5 class="card-title"><i class="fa-solid fa-file-import"></i> Import</h5>
 					<hr>
 					<p class="card-text">Shows how to import Excel file into MySQL database.</p>
-					<a href="#" class="btn btn-dark btn-block disabled">Try it <i class="fa-solid fa-angles-right"></i></a>
+					<a href="<?= base_url('import'); ?>" class="btn btn-dark btn-block">Try it <i class="fa-solid fa-angles-right"></i></a>
 				</div>
 				<div class="card-footer text-muted">
-					<span class="ci3_timeAgo"> 0 days ago </span>
+					<span class="ci3_timeAgo"> 1 days ago </span>
 				</div>
 			</div>
 		</div>

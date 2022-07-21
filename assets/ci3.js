@@ -244,5 +244,45 @@ $(document).ready(function(){
             },
         });
     })
+    
+
+
+    //--------- import excel
+
+    $("#uploadExcelFile").submit(function(event){
+        event.preventDefault();
+        var file = $('#uploadedExcelFile').prop("files")[0]; // Get the file
+        var form = new FormData(); // Making the form object        
+        form.append("uploadedExcelFile", file); // Adding the image to the form
+        //console.log(file)
+        $.ajax({
+            type: "POST",
+            url: "import",
+            data: form,
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function(){
+               console.log("wait..")
+            },
+            success: function(result){ 
+                tata.success('Upload File', 'File has been uploaded successfully');
+                $("#fileDetails").hide();
+                $("#uploadFile").trigger('reset');
+                $(".custom-file-label").text("Choose another file")
+                $("#Fsuccess").show();
+                $("#Fsuccess").html("<h5>File has been uploaded successfully.</h5>");
+                //location.reload();
+                console.log(result);
+            },
+            error: function(result){ 
+                tata.error('Upload File', result.responseJSON.error.error);
+                $("#Ferror").show();
+                $("#Ferror").html(result.responseJSON.error.error)
+                //console.log(result);
+            },
+        });        
+    })
+
 
 });
