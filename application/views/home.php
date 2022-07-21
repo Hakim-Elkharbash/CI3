@@ -36,7 +36,7 @@
 					<h5 class="card-title"><i class="fa-solid fa-file-import"></i> Import</h5>
 					<hr>
 					<p class="card-text">Shows how to import Excel file into MySQL database.</p>
-					<a href="<?= base_url('import'); ?>" class="btn btn-dark btn-block">Try it <i class="fa-solid fa-angles-right"></i></a>
+					<a href="<?= base_url('import'); ?>" class="btn btn-dark btn-block">Try it <i class="fa-solid fa-clock"></i> (!Completed)</a>
 				</div>
 				<div class="card-footer text-muted">
 					<span class="ci3_timeAgo"> 1 days ago </span>
@@ -49,7 +49,7 @@
 					<h5 class="card-title"><i class="fa-solid fa-chart-column"></i> Charts</h5>
 					<hr>
 					<p class="card-text">Shows different types of charts.</p>
-					<a href="#" class="btn btn-dark btn-block disabled" >Try it <i class="fa-solid fa-angles-right"></i></a>
+					<a href="#" class="btn btn-dark btn-block disabled" >Pending <i class="fa-solid fa-stop"></i></a>
 				</div>
 				<div class="card-footer text-muted">
 					<span class="ci3_timeAgo"> 0 days ago </span>
@@ -63,7 +63,7 @@
 					<h5 class="card-title"><i class="fa-solid fa-map-location-dot"></i> Maps</h5>
 					<hr>
 					<p class="card-text">Shows different types of charts.</p>
-					<a href="#" class="btn btn-dark btn-block disabled" >Try it <i class="fa-solid fa-angles-right"></i></a>
+					<a href="#" class="btn btn-dark btn-block disabled" >Pending <i class="fa-solid fa-stop"></i></a>
 				</div>
 				<div class="card-footer text-muted">
 					<span class="ci3_timeAgo"> 0 days ago </span>
