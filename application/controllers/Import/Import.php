@@ -1,7 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once FCPATH.'vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+//use PhpOffice\PhpSpreadsheet\Writer\Xlsx; // to create excel
+
 class Import extends CI_Controller {
+	
+	private $excelFile;
 
 	public function index()
 	{
@@ -19,22 +26,55 @@ class Import extends CI_Controller {
 	}	
 
 
-    public function import()
-	{
-		print_r($_FILES['uploadedExcelFile']); // to show file details
-		
-		/* if (!$this->upload->do_upload('uploadedFile')){
-				$error = array('error' => $this->upload->display_errors());
-				header('HTTP/1.1 500 Internal Server');
-        		header('Content-Type: application/json; charset=UTF-8');
-        		die(json_encode(array('error' => $error)));
-				//print_r($error);
-		}
-		else{
-				$data = array('upload_data' => $this->upload->data());
-				print_r($data);
-		}	 */
+    public function read()
+	{	
+		$excelFile = $_FILES['uploadedExcelFile']['tmp_name']; // to show file details
+		// var_dump($_FILES['uploadedExcelFile']);
+		// echo $excelFile;
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($excelFile);
+		$dataSheet = $spreadsheet->getActiveSheet()->toArray()[0];
+		//$this->load->view('import/add', $dataSheet);
+		echo json_encode($dataSheet);
+
+		//to creat excel file
+			// $spreadsheet = new Spreadsheet();
+			// $sheet = $spreadsheet->getActiveSheet();
+			// $sheet->setCellValue('A1', 'Hello World !');
+			// $writer = new Xlsx($spreadsheet);
+			// $writer->save(FCPATH.'uploads/hello worldTest.xlsx');
 	}
 
+	public function update()
+	{	
+		//-------- setup table
+		$setupTable = explode (",", $_POST['selectedField']);
+		//print_r($setupTable);
+		$this->load->model('ImportModal');
+		$this->ImportModal->setupTable($setupTable);
 
+		//-------- add selected fialds to the table
+		//newData[][];
+		$excelFile = $_FILES['uploadedExcelFile']['tmp_name']; // to show file details
+		 //var_dump($_FILES['uploadedExcelFile']);
+		 //echo $excelFile;
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($excelFile);
+		$dataSheet = $spreadsheet->getActiveSheet()->toArray();
+
+		for($row = 1; $row <= count($dataSheet)-1; $row++) {
+			for($col = 0; $col <= count($dataSheet[$row])-1; $col++){
+				if (in_array($dataSheet[0][$col], $setupTable)){
+					//$newData[$row][$col] = $dataSheet[$row][$col];
+					$newData[$row][$dataSheet[0][$col]] = $dataSheet[$row][$col];		
+				}
+			}
+		}
+		//print_r($newData);
+
+		foreach ($newData as $rows){
+			$this->load->model('ImportModal');
+			$this->ImportModal->saveData($rows);
+			//print_r($rows);
+		}
+		
+	}
 }

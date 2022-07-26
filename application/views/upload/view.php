@@ -1,7 +1,7 @@
 <div class="card-header">
 	<h3 class="float-left"><i class="fa-solid fa-upload"></i> Upload..</h3>
 	<a href="<?= base_url(); ?>" class="btn btn-outline-danger float-right"><i class="fa-solid fa-angle-left"></i> Back</a>
-  <a href="<?= base_url('upload/add'); ?>" class="btn btn-primary float-right mr-2"><i class="fa-solid fa-circle-plus"></i> Add New</a>
+  <a href="<?= base_url('upload/add'); ?>" class="btn btn-primary float-right mr-2"><i class="fa-solid fa-circle-plus"></i> Upload File</a>
 	<!-- <button class="btn btn-danger float-right mr-2" style="<?php //if (count($files) == 0) echo 'display:none'; ?>" id="delAllUsers">Delete All</button> -->
 </div>
 <div class="card-body">	

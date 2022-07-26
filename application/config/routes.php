@@ -31,4 +31,6 @@ $route['import'] = 'Import/Import/index';
 
 $route['import/add'] = 'Import/Import/add';
 
-$route['import/import'] = 'Import/Import/import';
+$route['import/read'] = 'Import/Import/read';
+
+$route['import/update'] = 'Import/Import/update';

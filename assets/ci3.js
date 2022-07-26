@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+    var file 
+
     $("#SaveChanges").click(function(){
         tata.text('Setting', 'Email has been updated', {
             //duration: 5000
@@ -190,21 +193,26 @@ $(document).ready(function(){
             cache: false,
             processData: false,
             beforeSend: function(){
-               console.log("wait..")
+               //console.log("loading..")
+               $("#fileDetails").hide();
+               $("#loading").show();
             },
             success: function(result){ 
+                $("#loading").hide();
                 tata.success('Upload File', 'File has been uploaded successfully');
                 $("#fileDetails").hide();
                 $("#uploadFile").trigger('reset');
                 $(".custom-file-label").text("Choose another file")
                 $("#Fsuccess").show();
-                $("#Fsuccess").html("<h5>File has been uploaded successfully.</h5>");
+                $("#Fsuccess").html("<p>File has been uploaded successfully.</p>");
                 //location.reload();
                 //console.log(result);
             },
             error: function(result){ 
-                tata.error('Upload File', result.responseJSON.error.error);
+                $("#loading").hide();
+                $("#fileDetails").show();
                 $("#Ferror").show();
+                tata.error('Upload File', result.responseJSON.error.error);
                 $("#Ferror").html(result.responseJSON.error.error)
                 //console.log(result);
             },
@@ -251,38 +259,79 @@ $(document).ready(function(){
 
     $("#uploadExcelFile").submit(function(event){
         event.preventDefault();
-        var file = $('#uploadedExcelFile').prop("files")[0]; // Get the file
-        var form = new FormData(); // Making the form object        
-        form.append("uploadedExcelFile", file); // Adding the image to the form
+        file = $('#uploadedExcelFile').prop("files")[0]; // Get the file
+        form = new FormData(); // Making the form object        
+        form.append("uploadedExcelFile", file); // Adding the file to the form
         //console.log(file)
         $.ajax({
             type: "POST",
-            url: "import",
+            url: "read",
             data: form,
             contentType: false,
             cache: false,
             processData: false,
             beforeSend: function(){
-               console.log("wait..")
+               //console.log("loading..")
+               $("#fileDetails").hide();
+               $("#loading").show();
             },
             success: function(result){ 
+                $("#pickFields").html("")
+                $("#loading").hide();
                 tata.success('Upload File', 'File has been uploaded successfully');
                 $("#fileDetails").hide();
                 $("#uploadFile").trigger('reset');
-                $(".custom-file-label").text("Choose another file")
+                $(".custom-file-label").text("Choose file")
                 $("#Fsuccess").show();
-                $("#Fsuccess").html("<h5>File has been uploaded successfully.</h5>");
-                //location.reload();
-                console.log(result);
+                //console.log(JSON.parse(result))
+                JSON.parse(result).forEach((element) => {
+                    if (element != null) {
+                        //console.log(element)
+                        $("#pickFields").append('<div class="col-lg-2 mb-4" > <div class="card bg-light"> <div class="align-self-center pt-3 pb-3"><h5>'+element+'</h5></div> <div class="card-body align-self-center"><div><input class="form-check-input" style="width: 30px; height: 30px; margin-top:-30px" checked type="checkbox" value="'+element+'" name="fields[]"></div></div></div></div>')
+                    }
+                });             
             },
             error: function(result){ 
-                tata.error('Upload File', result.responseJSON.error.error);
+                //tata.error('Upload File', result.responseJSON.error.error);
                 $("#Ferror").show();
-                $("#Ferror").html(result.responseJSON.error.error)
+                $("#Ferror").html(result)
                 //console.log(result);
             },
         });        
     })
 
+    
+    $("#importFields").click(function(){
+        var checkedFeilds = []
+        $("input[name='fields[]']:checked").each(function ()
+        {
+            checkedFeilds.push($(this).val());
+        });        
+        //console.log(checked)
+        form = new FormData(); // Making the form object        
+        form.append("uploadedExcelFile", file); // Adding the file to the form
+        form.append("selectedField", checkedFeilds); // Adding selected Fields to the form
+        
+        $.ajax({
+            type: "POST",
+            url: "update", // without db/ becuase the route is inside db/ 
+            data: form,
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function(){
+                console.log("wait..")
+            },
+            success: function(result){ 
+                tata.success('Upload', 'Fields has beet imported successfully');
+                console.log(result);
+            },
+            error: function(result){ 
+                tata.success('DB Error', 'Fiald to imported');
+                console.log(result);
+            },
+        });
+
+    })
 
 });

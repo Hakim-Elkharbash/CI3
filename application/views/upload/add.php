@@ -13,6 +13,22 @@
                 <input type="file" class="custom-file-input" id="uploadedFile" name="uploadedFile">
                 <label class="custom-file-label" for="uploadedFile">Choose file</label>
             </div>
+            <div id="loading" style="display:none">
+                <div class="d-flex justify-content-center">
+                  <div class="spinner-grow text-primary" role="status">
+                      <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-secondary" role="status">
+                      <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-success" role="status">
+                      <span class="sr-only">Loading...</span>
+                  </div>
+                  <div class="spinner-grow text-danger" role="status">
+                      <span class="sr-only">Loading...</span>
+                  </div>
+                </div>    
+            </div>
             <div id="Fsuccess" style="display:none" class="alert alert-success" role="alert">
                     
             </div>
@@ -31,4 +47,3 @@
         </form>
         </div>
   </div>
-
