@@ -155,7 +155,6 @@ $(document).ready(function(){
     })
     
 
-
     //-------------- Upload files 
     $('input[type="file"]').change(function(e) {
         //console.log(fileDetails)
@@ -202,9 +201,9 @@ $(document).ready(function(){
                 $("#loading").hide();
                 $("#fileDetails").show();
                 $("#Ferror").show();
-                tata.error('Upload File', result.responseJSON.error.error);
-                $("#Ferror").html(result.responseJSON.error.error)
-                //console.log(result);
+                //tata.error('Upload File', result.responseJSON.error.error);
+                $("#Ferror").html("Can't upload the file")
+                console.log(result);
             },
         });        
     })
