@@ -14,7 +14,37 @@
                 <label class="custom-file-label" for="uploadedExcelFile">Choose file</label>
             </div>
            
-            <div id="loading" style="display:none">
+            <div id="fileDetails" style="display:none">
+                <div id="Ftype">
+                    
+                </div>
+                <div id="Fsize" class="mb-3">
+                    
+                </div>
+                <div id="Ferror" style="display:none" class="alert alert-danger" role="alert">
+                    
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-upload"></i> Upload</button>
+            </div>  
+            
+            
+            <div id="Fsuccess" style="display:none">
+                <div id="Imsg">
+                </div>   
+              
+                <hr>
+                <br>         
+                <div class="container">
+                    <div class="row" id="pickFields">
+                        
+                    </div>
+                </div> <!--container div  -->
+                <hr>
+                <a id="importFields" class="btn btn-danger btn-lg btn-block"><i class="fa-solid fa-file-import"></i> Import</a>
+            </div>
+        </form>
+
+        <div id="loading" style="display:none" class="pt-3">
                 <div class="d-flex justify-content-center">
                   <div class="spinner-grow text-primary" role="status">
                       <span class="sr-only">Loading...</span>
@@ -31,35 +61,14 @@
                 </div>    
             </div>
 
-            <div id="Fsuccess" style="display:none">
+            <div id="Isuccess" style="display:none">
                 <div class="class alert alert-success" role="alert"">
-                    <p>File has been imported. Please pick the fields you want to import.</p>
+                    <b>Data has been saved in DB.</b>
                 </div>   
-                <hr>
-                <br>         
-                <div class="container">
-                    <div class="row" id="pickFields">
-                        
-                    </div>
-                </div> <!--container div  -->
-                <hr>
-                <a id="importFields" class="btn btn-danger btn-lg btn-block"><i class="fa-solid fa-file-import"></i> Import</a>
+                <br>                   
+                <a href="<?= base_url('import'); ?>" class="btn btn-success btn-block btn-lg"><i class="fa-solid fa-table-cells"></i> Show Imported Data</a>
             </div>
 
-
-            <div id="fileDetails" style="display:none">
-                <div id="Ftype">
-                    
-                </div>
-                <div id="Fsize" class="mb-3">
-                    
-                </div>
-                <div id="Ferror" style="display:none" class="alert alert-danger" role="alert">
-                    
-                </div>
-                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-upload"></i> Upload</button>
-            </div>    
-        </form>
         </div>
   </div>
 

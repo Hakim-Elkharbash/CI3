@@ -12,8 +12,9 @@ class Import extends CI_Controller {
 
 	public function index()
 	{
-        $data["import"]="Import";
 		$this->load->view('header');
+		$this->load->model('ImportModal');
+		$data['import'] = $this->ImportModal->showData();
 		$this->load->view('import/view', $data);
 		$this->load->view('footer');
 	}
@@ -64,17 +65,12 @@ class Import extends CI_Controller {
 			for($col = 0; $col <= count($dataSheet[$row])-1; $col++){
 				if (in_array($dataSheet[0][$col], $setupTable)){
 					//$newData[$row][$col] = $dataSheet[$row][$col];
-					$newData[$row][$dataSheet[0][$col]] = $dataSheet[$row][$col];		
+					$newData[$row][$dataSheet[0][$col]] = strval($dataSheet[$row][$col]);		
 				}
 			}
 		}
 		//print_r($newData);
-
-		foreach ($newData as $rows){
-			$this->load->model('ImportModal');
-			$this->ImportModal->saveData($rows);
-			//print_r($rows);
-		}
-		
+		$this->load->model('ImportModal');
+		$this->ImportModal->saveData($newData);		
 	}
 }

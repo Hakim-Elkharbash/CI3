@@ -5,9 +5,30 @@
 </div>
 <div class="card-body">	
 	<div class="row">
-		<div class="col-md-12">
-            <?= $import; ?>
-	    </div>
+	<div class="col-md-12">
+		<?php if (count($import) > 0){ ?>
+			<table class="table table-striped" id="viewImport">
+				<thead>
+					<tr>
+						<?php foreach ($import[0] as $key => $value){ ?>
+							<th scope="col"><?= $key;?> </th>
+						<?php } ?>
+					</tr>
+				</thead>
+				<tbody>
+					<?php $i=1; foreach($import as $row){  ?>
+					<tr>
+						<?php foreach ($row as $key => $value){ ?>
+							<td scope="row"><?= $value; ?></td>
+						<?php } ?>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+			<?php }else{ ?>
+				<div id="noRecords"> <h4 style="text-align: center;">No records.</h4> </div>
+		<?php } ?>
+	</div>
 
 		
 		

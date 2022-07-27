@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    
     var file 
 
     $("#SaveChanges").click(function(){
@@ -7,11 +7,9 @@ $(document).ready(function(){
             //duration: 5000
         })
     })
-
     
     $("#addUser").submit(function(event){
         event.preventDefault();
-
         // if ($("#fullName").val() == ""){
         //     $("#nameError").html("Required");
         // }
@@ -55,8 +53,6 @@ $(document).ready(function(){
         
     });
 
-
-
     $("#editUser").submit(function(event){
         event.preventDefault();
 
@@ -94,15 +90,12 @@ $(document).ready(function(){
         
     });
 
-
-
     // delete user
     $(".delUser").click(function(){   
         //console.log(this.id)
         $("#deleteModal").modal();
         $("#deleteModal #userId").val(this.id);
     })
-
 
     $("#ConfirmDelete").click(function(){
         $("#deleteModal").modal('hide');
@@ -163,21 +156,18 @@ $(document).ready(function(){
     
 
 
-    //-------------- UPLOAD
-    
+    //-------------- Upload files 
     $('input[type="file"]').change(function(e) {
         //console.log(fileDetails)
         $("#fileDetails").show();
         $("#Ferror").hide();
         $("#Fsuccess").hide();
-
+        $("#Isuccess").hide();
         var fileDetails = e.target.files[0];
         $(".custom-file-label").text(fileDetails.name)
         $("#Fsize").html("<b> Size: </b>" + Math.round(fileDetails.size/1024) + " KB")
         $("#Ftype").html("<b> Type: </b>" + fileDetails.type)  
     });
-
-
 
     $("#uploadFile").submit(function(event){
         event.preventDefault();
@@ -253,10 +243,7 @@ $(document).ready(function(){
         });
     })
     
-
-
     //--------- import excel
-
     $("#uploadExcelFile").submit(function(event){
         event.preventDefault();
         file = $('#uploadedExcelFile').prop("files")[0]; // Get the file
@@ -283,24 +270,27 @@ $(document).ready(function(){
                 $("#uploadFile").trigger('reset');
                 $(".custom-file-label").text("Choose file")
                 $("#Fsuccess").show();
-                //console.log(JSON.parse(result))
-                JSON.parse(result).forEach((element) => {
-                    if (element != null) {
-                        //console.log(element)
-                        $("#pickFields").append('<div class="col-lg-2 mb-4" > <div class="card bg-light"> <div class="align-self-center pt-3 pb-3"><h5>'+element+'</h5></div> <div class="card-body align-self-center"><div><input class="form-check-input" style="width: 30px; height: 30px; margin-top:-30px" checked type="checkbox" value="'+element+'" name="fields[]"></div></div></div></div>')
-                    }
-                });             
+                $("#Imsg").html("<div class='class alert alert-success' role='alert'> <p>Please pick the fields you want to import.<b> Accept text fields only</b></p> </div>");
+                // console.log(JSON.parse(result))
+                 JSON.parse(result).forEach((element) => {
+                     if (element != null) {
+                         //console.log(element)
+                         $("#pickFields").append('<div class="col-lg-2 mb-4" > <div class="card bg-light"> <div class="align-self-center pt-3 pb-3"><h5>'+element+'</h5></div> <div class="card-body align-self-center"><div><input class="form-check-input" style="width: 30px; height: 30px; margin-top:-30px" checked type="checkbox" value="'+element+'" name="fields[]"></div></div></div></div>')
+                     }
+                 });             
             },
             error: function(result){ 
-                //tata.error('Upload File', result.responseJSON.error.error);
+                tata.error('Upload File', "Can't read the file");
+                $("#loading").hide();
+                $("#fileDetails").show();
                 $("#Ferror").show();
-                $("#Ferror").html(result)
+                $("#Ferror").html("Can't read the file")
                 //console.log(result);
             },
         });        
     })
 
-    
+    //--------- save to DB
     $("#importFields").click(function(){
         var checkedFeilds = []
         $("input[name='fields[]']:checked").each(function ()
@@ -320,18 +310,23 @@ $(document).ready(function(){
             cache: false,
             processData: false,
             beforeSend: function(){
-                console.log("wait..")
+                //console.log("loading..")
+                $("#Fsuccess").hide();
+                $("#loading").show();
             },
             success: function(result){ 
+                $("#loading").hide();
+                $("#Isuccess").show();
                 tata.success('Upload', 'Fields has beet imported successfully');
                 console.log(result);
             },
             error: function(result){ 
-                tata.success('DB Error', 'Fiald to imported');
+                $("#loading").hide();
+                $("#Fsuccess").show();
+                $("#Imsg").html("<div class='alert alert-danger' role='alert'><b>Can't save data in DB. Accept text only</b></div>");
+                tata.error('DB Error', 'Fiald to imported');
                 console.log(result);
             },
         });
-
     })
-
 });

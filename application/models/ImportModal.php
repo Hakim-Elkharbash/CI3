@@ -15,7 +15,7 @@
             ); // set primary key
 
             foreach ($setupTable as $tableField) {
-                $fields[$tableField] = array('type' => 'VARCHAR', 'constraint' => '500', 'null' => TRUE);
+                $fields[$tableField] = array('type' => 'TEXT','null' => TRUE,);
             }// set other fialds
 
          $this->dbforge->add_field($fields);
@@ -23,8 +23,16 @@
          $this->dbforge->create_table('import');
         } 
 
+
         public function saveData($data){
-            return $this->db->insert('import',$data);
+            return $this->db->insert_batch('import', $data); 
         }  
+
+        public function showData(){
+            //$this->db->order_by('id', 'DESC');
+            $query = $this->db->get('import');
+            return $query->result();
+        }  
+
     }
 ?>
