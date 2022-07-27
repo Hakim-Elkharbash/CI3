@@ -11,6 +11,7 @@
 - Bootstrap Modal
 - FontAwsome
 - Toast Notifications
+- phpSpreadSheet (Composer)
 
 
 
